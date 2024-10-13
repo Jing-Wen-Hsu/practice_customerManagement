@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<!--為了使用thymeleaf，必須添加xmlns:th="http://www.thymeleaf.org"-->
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--th開頭表示是thymeleaf的功能，href是前往指定的相對網址，@{}用來存放網址-->
+<!--@{/}表示前往http://localhost:8080/-->
+<a th:href="@{/}">Home</a>
+
+<!--@{/new}表示前往http://localhost:8080/new-->
+<a th:href="@{/new}">Add New Customer</a>
+</div>
+<div>
+  <h1>List of Customer</h1>
+</div>
+<table>
+  <thead>
+  <tr>
+    <th>Customer ID</th>
+    <th>Customer First Name</th>
+    <th>Customer Last Name</th>
+    <th>Customer Email</th>
+  </tr>
+  </thead>
+  <tbody>
+
+<!--  th:each讓我們把後端接收到的list中的customer一個一個取出來，放到customer中，像是java中的foreach-->
+<tr th:each="customer : ${customers}">
+
+
+<!--  th:text負責將資料顯示在網頁上，${}用來讀取我們從後端得到的資料，例如：${customer.id}用來讀取用客戶的id，${customer.firstName}則是讀取客戶的名字。-->
+  <td th:text="${customer.id}"></td>
+  <td th:text="${customer.firstName}"></td>
+  <td th:text="${customer.lastName}"></td>
+  <td th:text="${customer.email}"></td>
+  <td>
+    <div>
+      <a th:href="@{'/view/' + ${customer.id}}">View</a>
+      <a th:href="@{'/edit/' + ${customer.id}}">Edit</a>
+      <a th:href="@{'/delete/' + ${customer.id}}">Delete</a>
+    </div>
+  </td>
+</tr>
+  </tbody>
+</table>
+
+</body>
+
+</html>

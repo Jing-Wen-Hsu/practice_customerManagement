@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Management System</title>
+</head>
+<body>
+<!--新增new_customer.html用來新增客戶，接收客戶的資料後交由後端處理。-->
+<div>
+  <div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/new}">Add New Customer</a>
+  </div>
+  <div>
+    <h1>Create New Customer</h1>
+  </div>
+
+  <!--    當按下Submit按鈕時，th:object中的資料會傳送到th:action的網址-->
+  <!--    th:action的作用和HTML的action相同，只是變成資料用thymeleaf傳到後端-->
+  <!--    th:object和表單綁定，接收後端的內容，也可以在按下Submit時把內容提供給後端-->
+  <div>
+    <form method="post" role="form" th:action="@{/new}" th:object="${customer}">
+      <div>
+        <label>Customer First Name</label>
+        <!--                th:field的*{firstName}表示這個欄位中的資料對應到customer的firstName-->
+        <input placeholder="Enter customer first name" type="text" th:field="*{firstName}" />
+
+        <!--                th:if="${#fields.hasErrors('firstName')}"的意思是，當格式有誤而且是firstName的問題時，會顯示錯誤訊息-->
+        <!--                th:if當裡面的條件是true時，才會顯示這段內容。-->
+
+        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+      </div>
+
+      <div>
+        <label>Customer Last Name</label>
+        <input  placeholder="Enter customer last name" type="text" th:field="*{lastName}" />
+        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+      </div>
+
+      <div>
+        <label>Customer Email</label>
+        <input placeholder="Enter customer email" type="text" th:field="*{email}" />
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+</div>
+</body>
+</html>

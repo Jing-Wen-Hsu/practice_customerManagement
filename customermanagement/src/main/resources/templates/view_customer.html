@@ -1,0 +1,40 @@
+//view_customer.html
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Management System</title>
+</head>
+<body>
+<!--view_customer.html查看單一客戶的資訊-->
+
+<div>
+  <div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/new}">Add New Customer</a>
+  </div>
+  <div>
+    <h1>Edit Customer</h1>
+  </div>
+
+  <div th:object="${customer}">
+    <div>
+      <label>Customer First Name</label>
+      <h3 th:text="${customer.firstName}"></h3>
+    </div>
+
+    <div>
+      <label>Customer Last Name</label>
+      <h3 th:text="${customer.lastName}"></h3>
+    </div>
+
+    <div>
+      <label>Customer Email</label>
+      <h3 th:text="${customer.email}"></h3>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

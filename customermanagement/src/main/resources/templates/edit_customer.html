@@ -1,0 +1,47 @@
+//edit_customer.html
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Management System</title>
+</head>
+<body>
+<!--edit_customer.html可以修改客戶的資料，只接受和傳送資料，實際對資料庫的操作用後端負責。-->
+
+<div>
+  <div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/new}">Add New Customer</a>
+  </div>
+  <div>
+    <h1>Edit Customer</h1>
+  </div>
+
+  <div>
+    <form method="post" role="form" th:action="@{'/edit/' + ${customer.id}}" th:object="${customer}">
+      <div>
+        <label>Customer First Name</label>
+        <input placeholder="Enter customer first name" type="text" th:field="*{firstName}" />
+        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+      </div>
+
+      <div>
+        <label>Customer Last Name</label>
+        <input placeholder="Enter customer last name" type="text" th:field="*{lastName}" />
+        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+      </div>
+
+      <div>
+        <label>Customer Email</label>
+        <input placeholder="Enter customer email" type="text" th:field="*{email}" />
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+</div>
+</body>
+</html>
